@@ -1,37 +1,29 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+// _layout.tsx
+import { Stack } from "expo-router";
+import { Provider as PaperProvider } from "react-native-paper";
+import { MD3LightTheme as DefaultTheme } from "react-native-paper";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+// Define a custom theme with baby blue and white
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#4fc3f7',      // Baby blue for primary elements
+    accent: '#ffffff',       // White for accent elements
+    background: '#f0f8ff',   // Light background (AliceBlue)
+    surface: '#ffffff',      // White surface color for components
+    text: '#000000',         // Black text
+    placeholder: '#b0bec5',  // Grey placeholder for text input
+    onSurface: '#4fc3f7',    // Baby blue on text and icons for emphasis
+  },
+};
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <PaperProvider theme={theme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen name="index" />
       </Stack>
-    </ThemeProvider>
+    </PaperProvider>
   );
 }
