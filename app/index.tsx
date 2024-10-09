@@ -1,13 +1,12 @@
-// index.tsx
 import { useState } from "react";
 import { SafeAreaView, FlatList, StyleSheet } from "react-native";
 import { TextInput, Button, List, IconButton, Menu, Divider, Appbar, useTheme } from "react-native-paper";
 
 const STATUSES = [
-  { label: "In Progress 🙌", color: "#4fc3f7" }, // Blue
-  { label: "Done ✅", color: "#32CD32" }, // Lime Green
-  { label: "Paused ⏸️", color: "#FF6961" }, // Light Red
-  { label: "Not Started 🛑", color: "#808080" }, // Grey
+  { label: "In Progress 🙌", color: "#4fc3f7" },  // Blue
+  { label: "Done ✅", color: "#32CD32" },         // Lime Green
+  { label: "Paused ⏸️", color: "#FF6961" },       // Light Red
+  { label: "Not Started 🛑", color: "#808080" },  // Grey
 ];
 
 export default function Index() {
@@ -16,7 +15,7 @@ export default function Index() {
   const [editingTask, setEditingTask] = useState(null);
   const [menuVisible, setMenuVisible] = useState(false);
   const [status, setStatus] = useState(STATUSES[0]); // Default to "In Progress"
-  const theme = useTheme(); // Get the custom theme
+  const theme = useTheme();
 
   // Add or Edit Task
   const addOrEditTask = () => {
@@ -50,13 +49,13 @@ export default function Index() {
     <List.Item
       title={item.title}
       description={`Status: ${item.status.label}`}
-      titleStyle={{ color: theme.colors.onSurface }} // Baby blue for task title
-      descriptionStyle={{ color: item.status.color }} // Dynamic color based on status
+      titleStyle={{ color: theme.colors.onSurface }} 
+      descriptionStyle={{ color: item.status.color }} 
       onPress={() => editTask(item)}
       right={() => (
         <IconButton
           icon="delete"
-          iconColor={theme.colors.primary} // Baby blue delete icon
+          iconColor={theme.colors.primary} 
           onPress={() => deleteTask(item.id)}
         />
       )}
